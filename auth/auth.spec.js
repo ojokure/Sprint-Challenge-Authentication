@@ -1,5 +1,6 @@
 const request = require('supertest');
 const authRouter = require('./auth-router');
+const server = require('../api/server')
 
 const input = {
     username: 'testing',
@@ -9,7 +10,7 @@ const input = {
 describe('authRouter', () => {
     describe('POST / register', () => {
         it('should return 200 OK', () => {
-            request(authRouter)
+            request(server)
                 .post('/register')
                 .send(input)
                 .set('Accept', 'application/json')
@@ -17,7 +18,7 @@ describe('authRouter', () => {
         })
 
         it('username should match "testing"', () => {
-            request(authRouter)
+            request(server)
                 .post('/register')
                 .send(input)
                 .set('Accept', 'application/json')
