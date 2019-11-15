@@ -2,13 +2,14 @@ const authRouter = require("express").Router();
 const Users = require("../Users/users-model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const jwtSecret = require("./auth-secrets");
 
 authRouter.post("/register", (req, res) => {
   // implement registration
-  const { username, password } = req.body;
-  const hash = bcrypt.hashSync(password, 10);
-  password = hash;
-  Users.add()
+  const user = req.body;
+  const hash = bcrypt.hashSync(user.password, 10);
+  user.password = hash
+  Users.add(user)
     .then(user => {
       res.status(200).json(user);
     })
@@ -39,5 +40,17 @@ authRouter.post("/login", (req, res) => {
       res.status(500).json(error);
     });
 });
+
+function generateToken(user) {
+  const payload = {
+    subject: user.id,
+    username: user.username
+  };
+  const options = {
+    expiresIn: "1h"
+  };
+
+  return jwt.sign(payload, jwtSecret.secret, options);
+}
 
 module.exports = authRouter;
