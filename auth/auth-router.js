@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const jwtSecret = require("./auth-secrets");
 
 authRouter.post("/register", (req, res) => {
-  // implement registration
   const user = req.body;
   const hash = bcrypt.hashSync(user.password, 10);
   user.password = hash
