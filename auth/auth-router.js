@@ -8,9 +8,14 @@ authRouter.post("/register", (req, res) => {
   const hash = bcrypt.hashSync(password, 10);
   password = hash;
   Users.add()
-  .then(user => {
-    res.stat
-  })
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: error.message
+      });
+    });
 });
 
 authRouter.post("/login", (req, res) => {
