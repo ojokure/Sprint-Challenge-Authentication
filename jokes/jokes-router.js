@@ -1,8 +1,8 @@
 const axios = require('axios');
 
-const router = require('express').Router();
+const jokesRouter = require('express').Router();
 
-router.get('/', (req, res) => {
+jokesRouter.get('/', (req, res) => {
   const requestOptions = {
     headers: { accept: 'application/json' },
   };
@@ -17,4 +17,4 @@ router.get('/', (req, res) => {
     });
 });
 
-module.exports = router;
+module.exports = jokesRouter;

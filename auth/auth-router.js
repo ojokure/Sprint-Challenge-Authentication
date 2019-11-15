@@ -1,11 +1,11 @@
-const router = require('express').Router();
+const authRouter = require('express').Router();
 
-router.post('/register', (req, res) => {
+authRouter.post('/register', (req, res) => {
   // implement registration
 });
 
-router.post('/login', (req, res) => {
+authRouter.post('/login', (req, res) => {
   // implement login
 });
 
-module.exports = router;
+module.exports = authRouter;
